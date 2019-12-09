@@ -7,7 +7,7 @@
 void afficher ()
 {
 	FILE *f;
-	f=fopen("/home/achref/Bureau/skytravel19/src/users.txt","r");
+	f=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/users.txt","r");
 	char login[20],password[20];
 	int role;
 	while(fscanf(f,"%s %s %d",login,password,&role) !=EOF){
@@ -19,7 +19,7 @@ void afficher ()
 int verifier (char login [], char password [])
 {
 	FILE *f;
-	f=fopen("/home/achref/Bureau/skytravel19/src/users.txt","r");
+	f=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/users.txt","r");
 	int role=-1;
 	int role1;
 	char login1[20],password1[20];
@@ -53,7 +53,7 @@ void ajouter_o(Offre o)
 {
 
  FILE *h;
- h=fopen("/home/achref/Bureau/skytravel19/src/offre.txt","a+"); 
+ h=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.txt","a+"); 
  if(h!=NULL)
  {
  fprintf(h,"%s %s %s %s %s %s\n",o.type_offre,o.localite_offre,o.date_expiration,o.prix,o.quantite,o.identifiant_offre); 
@@ -116,7 +116,7 @@ gtk_tree_view_append_column (GTK_TREE_VIEW (liste), column);
 
 store=gtk_list_store_new (COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
-  h = fopen("/home/achref/Bureau/skytravel19/src/offre.txt", "r"); 
+  h = fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.txt", "r"); 
 
   if(h==NULL)
   {
@@ -124,7 +124,7 @@ store=gtk_list_store_new (COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, 
   }
   else
 
-  { h = fopen("/home/achref/Bureau/skytravel19/src/offre.txt", "a+");
+  { h = fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.txt", "a+");
   while((fscanf(h,"%s %s %s %s %s %s \n",type_offre,localite_offre,date_expiration,prix,quantite,identifiant_offre)!= EOF))
     {
   gtk_list_store_append (store, &iter);
@@ -143,7 +143,7 @@ store=gtk_list_store_new (COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, 
 int tableau_Offre(Offre tab[])
  {
 int n=0;
-FILE* f=fopen("/home/achref/Bureau/skytravel19/src/offre.txt","r");
+FILE* f=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.txt","r");
 if(f!=NULL)
 {
 while(fscanf(f,"%s %s %s %s %s %s\n",tab[n].type_offre,tab[n].localite_offre,tab[n].date_expiration,tab[n].prix,tab[n].quantite,tab[n].identifiant_offre)!=EOF)
@@ -203,7 +203,7 @@ gtk_tree_view_append_column (GTK_TREE_VIEW (lista), column);
 
 store=gtk_list_store_new (COLS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
-  h = fopen("/home/achref/Bureau/skytravel19/src/client.txt", "r"); 
+  h = fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/client.txt", "r"); 
 
   if(h==NULL)
   {
@@ -211,7 +211,7 @@ store=gtk_list_store_new (COLS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
   }
   else
 
-  { h = fopen("/home/achref/Bureau/skytravel19/src/client.txt", "a+");
+  { h = fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/client.txt", "a+");
   while((fscanf(h,"%s %s %s\n",identifiantdeoffre,datereserver, nbrepersonne)!= EOF))
     {
   gtk_list_store_append (store, &iter);
@@ -230,7 +230,7 @@ void ajouter_offre1(Client c)
 {
 
  FILE *f;
- f=fopen("/home/achref/Bureau/skytravel19/src/client.txt","a+"); 
+ f=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/client.txt","a+"); 
  if(f!=NULL)
  {
  fprintf(f,"%s %s %s\n",c.identifiantdeoffre,c.datereserver,c.nbrepersonne); 
@@ -241,7 +241,7 @@ void ajouter_offre1(Client c)
 int tableau_Client(Client u[200])
  {
 int n=0;
-FILE* f=fopen("/home/achref/Bureau/skytravel19/src/client.txt","r");
+FILE* f=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/client.txt","r");
 if(f!=NULL)
 {
 while(fscanf(f,"%s %s %s\n",u[n].identifiantdeoffre,u[n].datereserver,u[n].nbrepersonne)!=EOF)
@@ -308,7 +308,7 @@ reecriver1(tab,n);
 void reecriver1(Offre tab[200],int n)
 {int i;
  FILE *f;
- f=fopen("/home/achref/Bureau/skytravel19/src/offre.txt","w"); 
+ f=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.txt","w"); 
 
 for(i=0;i<n;i++)
  {
@@ -364,7 +364,7 @@ return -1;
 void reecriver(Client u[200],int n)
 {int i;
  FILE *f;
- f=fopen("/home/achref/Bureau/skytravel19/src/client.txt","w"); 
+ f=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/client.txt","w"); 
 
 for(i=0;i<n;i++)
  {
@@ -386,6 +386,44 @@ reecriver(u,n-1);
 }
 }
 
+//recrementation////////////////////////////////////////////
+void recremetation(Offre tab[200],Client u[200],Client c)
+{int n1=tableau_Offre(tab);
+int n2=tableau_Client(u);
+int i1=rechercheplace1(u,c.identifiantdeoffre,n2);
+int i2=rechercheplace(tab,c.identifiantdeoffre);
+int a,b;
+if((i2!=-1)&&(i1!=-1))
+{sscanf(tab[i2].quantite,"%d",&a);
+sscanf(u[i1].nbrepersonne,"%d",&b);
+
+a=a+b;
+
+sprintf(tab[i2].quantite,"%d",a);
+reecriver1(tab,n1);
+}
+}
+//////////////////////////////////*/
+int facture(Offre tab[200],Client u[200],Client c)
+{int a,b,f;
+int n1=tableau_Offre(tab);
+int n2=tableau_Client(u);
+int i1=rechercheplace1(u,c.identifiantdeoffre,n2);
+int i2=rechercheplace(tab,c.identifiantdeoffre);
+sscanf(tab[i2].prix,"%d",&a);
+sscanf(c.nbrepersonne,"%d",&b);
+f=a*b;
+return f;
+}
+int verificationide(Client u[200] ,Client c)
+{
+int n=tableau_Client(u);
+int i=rechercheplace1(u,c.identifiantdeoffre,n);
+if(i!=-1)
+return -1;
+return 1;
+}
+
 //fin wassim
 //achref
 
@@ -394,7 +432,7 @@ int verifier_o (Offre o1)
 Offre o;
 FILE *k1;
 int testeur =0;
-k1=fopen("/home/achref/Bureau/skytravel19/src/offre.txt","r");
+k1=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.txt","r");
 while (fscanf(k1,"%s %s %s %s %s %s\n",o.type_offre,o.localite_offre,o.date_expiration,o.prix,o.quantite,o.identifiant_offre)!=EOF) 
   {
 if (strcmp(o.identifiant_offre,o1.identifiant_offre)==0)
@@ -409,15 +447,15 @@ void modifier_o (Offre o1)
 {
 	Offre o;
 	FILE *f1, *tmp;
-	f1=fopen("/home/achref/Bureau/skytravel19/src/offre.txt","r");
-	tmp=fopen("/home/achref/Bureau/skytravel19/src/offre.tmp","a+");
+	f1=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.txt","r");
+	tmp=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.tmp","a+");
 	while(fscanf(f1,"%s %s %s %s %s %s\n",o.type_offre,o.localite_offre,o.date_expiration,o.prix,o.quantite,o.identifiant_offre)!=EOF){
 		if(strcmp(o.identifiant_offre,o1.identifiant_offre)==0){fprintf(tmp,"%s %s %s %s %s %s\n",o1.type_offre,o1.localite_offre,o1.date_expiration,o1.prix,o1.quantite,o1.identifiant_offre);}
 		else fprintf(tmp,"%s %s %s %s %s %s\n",o.type_offre,o.localite_offre,o.date_expiration,o.prix,o.quantite,o.identifiant_offre);
 }
 fclose(f1);
 fclose(tmp);
-rename("/home/achref/Bureau/skytravel19/src/offre.tmp","/home/achref/Bureau/skytravel19/src/offre.txt");
+rename("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.tmp","/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.txt");
 }
 
 int verifier_os (char id_o[])
@@ -425,7 +463,7 @@ int verifier_os (char id_o[])
 Offre o;
 FILE *k1;
 int testeur1 =0;
-k1=fopen("/home/achref/Bureau/skytravel19/src/offre.txt","r");
+k1=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.txt","r");
 while (fscanf(k1,"%s %s %s %s %s %s\n",o.type_offre,o.localite_offre,o.date_expiration,o.prix,o.quantite,o.identifiant_offre)!=EOF) 
   {
 if (strcmp(o.identifiant_offre,id_o)==0)
@@ -440,44 +478,60 @@ void supprimer_o (char identifiant[])
 {
 	Offre o;
 	FILE *f2, *tmp;
-	f2=fopen("/home/achref/Bureau/skytravel19/src/offre.txt","r");
-	tmp=fopen("/home/achref/Bureau/skytravel19/src/offre.tmp","a+");
+	f2=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.txt","r");
+	tmp=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.tmp","a+");
 	while(fscanf(f2,"%s %s %s %s %s %s\n",o.type_offre,o.localite_offre,o.date_expiration,o.prix,o.quantite,o.identifiant_offre)!=EOF){
 		if(strcmp(o.identifiant_offre,identifiant)==0) {continue;}
 else fprintf(tmp,"%s %s %s %s %s %s\n",o.type_offre,o.localite_offre,o.date_expiration,o.prix,o.quantite,o.identifiant_offre);
 }
 fclose(f2);
 fclose(tmp);
-rename("/home/achref/Bureau/skytravel19/src/offre.tmp","/home/achref/Bureau/skytravel19/src/offre.txt");
+rename("/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.tmp","/home/yaich/Desktop/skytravel1912/skytravel19/src/offre.txt");
 }
 
 // mouad
 
 void ajouter(char nom[],char prenom[],char username[],char password[],char CIN[],char adresse[],char date[])
 {	FILE *f,*g;
-	f=fopen("/home/achref/Bureau/skytravel19/src/uses.txt","a+");
-	g=fopen("/home/achref/Bureau/skytravel19/src/users.txt","a+");
+	f=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/uses.txt","a+");
+	g=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/users.txt","a+");
 	if(f!=NULL) {
-		fprintf(f,"%s %s %s %s %s %s %s \n",nom,prenom,username,password,CIN,adresse,date);
-	fprintf(g,"%s %s %d \n",username,password,3);
+		fprintf(f,"%s %s %s %s %s %s %s\n",nom,prenom,username,password,CIN,adresse,date);
+	fprintf(g,"%s %s %d\n",username,password,3);
 	}
 	fclose(f);
 	fclose(g);
 	}
 
+int verifier_client (char CIN[])
+{
+FILE *k1;
+int testeur =0;
+char nomm[20],prenomm[20],usernamem[20],passwordm[20],CINm[20],adressem[20],datem[20];
+k1=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/uses.txt","r");
+while (fscanf(k1,"%s %s %s %s %s %s\n",nomm,prenomm,usernamem,passwordm,CINm,adressem,datem)!=EOF) 
+  {
+if (strcmp(CIN,CINm)==0)
+testeur =1;
+   }
+fclose(k1);
+return testeur;
+}
 
 void supprimer(char CIN[])
 {
 	char nomm[20],prenomm[20],usernamem[20],passwordm[20],CINm[20],adressem[20],datem[20];
 	FILE *f, *g,*h,*k;
-	f=fopen("/home/achref/Bureau/skytravel19/srcc/uses.txt","r");
-	g=fopen("/home/achref/Bureau/skytravel19/src/uses1.txt","w");
-	h=fopen("/home/achref/Bureau/skytravel19/src/users.txt","r");
-	k=fopen("/home/achref/Bureau/skytravel19/src/users1.txt","w");
+	f=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/uses.txt","r");
+	g=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/uses1.txt","a+");
+	h=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/users.txt","r");
+	k=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/users1.txt","a+");
 	while(fscanf(f,"%s %s %s %s %s %s %s \n",nomm,prenomm,usernamem,passwordm,CINm,adressem,datem)!=EOF){
 		if(!strcmp(CIN,CINm)) {continue;}
 else {fprintf(g,"%s %s %s %s %s %s %s\n",nomm,prenomm,usernamem,passwordm,CINm,adressem,datem);
-fprintf(k,"%s %s %d \n",usernamem,passwordm,2);
+fprintf(k,"%s %s %d \n",usernamem,passwordm,3);
+fprintf(k,"%s %s %d \n","admin","adminn",1);
+fprintf(k,"%s %s %d \n","agent","agentt",2);
 
 }
 }
@@ -485,10 +539,10 @@ fclose(f);
 fclose(g);
 fclose(h);
 fclose(k);
-remove("/home/achref/Bureau/skytravel19/src/uses.txt");
-remove("/home/achref/Bureau/skytravel19/src/users.txt");
-rename("/home/achref/Bureau/skytravel19/src/uses1.txt","/home/achref/Bureau/skytravel19/src/uses.txt");
-rename("/home/achref/Bureau/skytravel19/src/users1.txt","/home/achref/Bureau/skytravel19/src/users.txt");
+remove("/home/yaich/Desktop/skytravel1912/skytravel19/src/uses.txt");
+remove("/home/yaich/Desktop/skytravel1912/skytravel19/src/users.txt");
+rename("/home/yaich/Desktop/skytravel1912/skytravel19/src/uses1.txt","/home/yaich/Desktop/skytravel1912/skytravel19/src/uses.txt");
+rename("/home/yaich/Desktop/skytravel1912/skytravel19/src/users1.txt","/home/yaich/Desktop/skytravel1912/skytravel19/src/users.txt");
 }
 
 
@@ -497,26 +551,30 @@ void modifier(char nom[],char prenom[],char username[],char password[],char CIN[
 {
 	char nomm[20],prenomm[20],usernamem[20],passwordm[20],CINm[20],adressem[20],datem[20];
 	FILE *f, *g,*h,*k;
-	f=fopen("/home/achref/Bureau/skytravel19/src/uses.txt","r");
-	g=fopen("/home/achref/Bureau/skytravel19/src/uses1.txt","w+");
-	h=fopen("/home/achref/Bureau/skytravel19/src/users.txt","r");
-	k=fopen("/home/achref/Bureau/skytravel19/src/users1.txt","w+");
+	f=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/uses.txt","r");
+	g=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/uses1.txt","a+");
+	h=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/users.txt","r");
+	k=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/users1.txt","a+");
 	while(fscanf(f,"%s %s %s %s %s %s %s \n",nomm,prenomm,usernamem,passwordm,CINm,adressem,datem)!=EOF){
 		if(!strcmp(CIN,CINm)) {fprintf(g,"%s %s %s %s %s %s %s\n",nom,prenom,username,password,CIN,adresse,date);
-fprintf(k,"%s %s %d \n",username,password,2);
+fprintf(k,"%s %s %d \n",username,password,3);
+fprintf(k,"%s %s %d \n","admin","adminn",1);
+fprintf(k,"%s %s %d \n","agent","agentt",2);
 }
 		else {fprintf(g,"%s %s %s %s %s %s %s\n",nomm,prenomm,usernamem,passwordm,CINm,adressem,datem);
-fprintf(k,"%s %s %d \n",usernamem,passwordm,2);
+fprintf(k,"%s %s %d \n",usernamem,passwordm,3);
+fprintf(k,"%s %s %d \n","admin","adminn",1);
+fprintf(k,"%s %s %d \n","agent","agentt",2);
 }
 }
 fclose(f);
 fclose(g);
 fclose(h);
 fclose(k);
-remove("/home/achref/Bureau/skytravel19/src/uses.txt");
-remove("/home/achref/Bureau/skytravel19/src/users.txt");
-rename("/home/achref/Bureau/skytravel19/src/uses1.txt","/home/achref/Bureau/skytravel19/src/uses.txt");
-rename("/home/achref/Bureau/skytravel19/src/users1.txt","/home/achref/Bureau/skytravel19/src/users.txt");
+remove("/home/yaich/Desktop/skytravel1912/skytravel19/src/uses.txt");
+remove("/home/yaich/Desktop/skytravel1912/skytravel19/src/users.txt");
+rename("/home/yaich/Desktop/skytravel1912/skytravel19/src/uses1.txt","/home/yaich/Desktop/skytravel1912/skytravel19/src/uses.txt");
+rename("/home/yaich/Desktop/skytravel1912/skytravel19/src/users1.txt","/home/yaich/Desktop/skytravel1912/skytravel19/src/users.txt");
 
 }
 void afficher_client(GtkWidget *liste)
@@ -580,7 +638,7 @@ gtk_tree_view_append_column (GTK_TREE_VIEW (liste), column);
 
 store=gtk_list_store_new (COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
-  f = fopen("/home/achref/Bureau/skytravel19/src/uses.txt", "r"); 
+  f = fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/uses.txt", "r"); 
 
   if(f==NULL)
   {
@@ -588,7 +646,7 @@ store=gtk_list_store_new (COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, 
   }
   else
 
-  { f = fopen("/home/achref/Bureau/skytravel19/src/uses.txt", "a+");
+  { f = fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/uses.txt", "a+");
        while((fscanf(f,"%s %s %s %s %s %s %s \n",nom,prenom,username,password,cin,adresse,date)!= EOF))
     {
   gtk_list_store_append (store, &iter);
@@ -601,3 +659,236 @@ store=gtk_list_store_new (COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, 
   }
 }
 //fin mouadh
+
+//aymen
+
+void ajouter_reclamation(char type[],char rec[],int id_rec,char reponse[])
+{
+ 
+ FILE *f, *g;
+ char sdate[20];
+ f=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées.txt","a+");
+ g=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations.txt","a+");
+// h=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/sdate.txt","a");
+ if((f!=NULL)&&(g!=NULL))
+ {
+// sdate=$(date +%d%m%y);
+ fprintf(f,"%s %s %d %s\n",type,rec,id_rec,reponse);
+ fprintf(g,"%s %s %d %s\n",type,rec,id_rec,reponse);
+// fprintf(h,"%s",sdate);
+ fclose(f);
+ fclose(g);
+// fclose(h);
+ }
+}
+
+void afficher_reclamation(GtkWidget *liste)
+{
+enum{
+	TYPE,
+	REC,
+	ID_REC,
+	REPONSE,
+	COLUMNS
+};
+GtkCellRenderer *renderer;
+GtkTreeViewColumn *column;
+GtkTreeIter iter;
+GtkListStore *store;
+
+
+char type[30];
+char rec[200];
+int id_rec;
+char reponse[200];
+char ch[50];
+store =NULL;
+
+FILE *f;
+
+store=gtk_tree_view_get_model(liste);
+if(store==NULL)
+
+	/*renderer=gtk_cell_renderer_text_new();
+	column=gtk_tree_view_column_new_with_attributes("nom",renderer,"text",NOM,NULL);
+	gtk_tree_view_append_column(GTK_TREE_VIEW (liste),column);
+	
+	renderer=gtk_cell_renderer_text_new();
+	column=gtk_tree_view_column_new_with_attributes("prenom",renderer,"text",PRENOM,NULL);
+	gtk_tree_view_append_column(GTK_TREE_VIEW (liste),column);*/
+
+	renderer=gtk_cell_renderer_text_new();
+	column=gtk_tree_view_column_new_with_attributes("type",renderer,"text",TYPE,NULL);
+	gtk_tree_view_append_column(GTK_TREE_VIEW (liste),column);	
+
+	renderer=gtk_cell_renderer_text_new();
+	column=gtk_tree_view_column_new_with_attributes("rec",renderer,"text",REC,NULL);
+	gtk_tree_view_append_column(GTK_TREE_VIEW (liste),column);
+
+	renderer=gtk_cell_renderer_text_new();
+	column=gtk_tree_view_column_new_with_attributes("id_rec",renderer,"text",ID_REC,NULL);
+	gtk_tree_view_append_column(GTK_TREE_VIEW (liste),column);	
+
+	renderer=gtk_cell_renderer_text_new();
+	column=gtk_tree_view_column_new_with_attributes("reponse",renderer,"text",REPONSE,NULL);
+	gtk_tree_view_append_column(GTK_TREE_VIEW(liste),column);
+	
+	store=gtk_list_store_new(COLUMNS,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING);
+
+	f=fopen("/home/mouadh/Projects/skytravel19/src/toutes_les_réclamations.txt","r");
+
+	if(f==NULL)
+	{
+		return ;
+	}
+	else
+	
+	{ 
+	f=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations.txt","a+");
+		//while(fscanf(f,"%s %s %s %s %s %s\n","aymen","ghorbel",type,rec,"N/A","N/A")!=EOF)
+		while(fscanf(f,"%s %s %d %s \n",type,rec,&id_rec,reponse)!=EOF)
+		{
+			sprintf(ch,"%d",id_rec);
+			gtk_list_store_append(store,&iter);
+			gtk_list_store_set(store,&iter,TYPE,type,REC,rec,ID_REC,ch,REPONSE,reponse,-1);
+		}
+	   fclose(f);
+	gtk_tree_view_set_model(GTK_TREE_VIEW(liste),GTK_TREE_MODEL(store));
+	g_object_unref(store);
+	}
+
+}
+
+
+void ajouter_reponse(char id[], char reponsef[])
+{
+	FILE *f1, *tmp1, *f2, *tmp2, *f3;
+	char type[20];
+	char rec[200];
+	int id_rec;
+	char reponse[200];
+	char ch[100];
+
+	f1=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations.txt","r");
+	tmp1=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations1.txt","a+");
+	f2=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_traitées.txt","a");
+	f3=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées.txt","a+");
+	tmp2=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées1.txt","a");
+
+	while(fscanf(f1,"%s %s %d %s\n",type,rec,&id_rec,reponse)!=EOF)
+{
+	sprintf(ch,"%d",id_rec);
+	if(strcmp(ch,id)==0)
+	{
+		fprintf(tmp1,"%s %s %d %s\n",type,rec,id_rec,reponsef);
+		fprintf(f2,"%s %s %d %s\n",type,rec,id_rec,reponsef);
+	}
+	else 
+	{
+		fprintf(tmp1,"%s %s %d %s\n",type,rec,id_rec,reponse);
+		fprintf(tmp2,"%s %s %d %s\n",type,rec,id_rec,reponse);
+	}
+}
+fclose(f1);
+fclose(tmp1);
+fclose(f2);
+fclose(f3);
+fclose(tmp2);
+rename("/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations1.txt","/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations.txt");
+rename("/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées1.txt","/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées.txt");
+}
+
+
+/*int identifiant()
+{
+	FILE *f1, *tmp1;
+	int id_rec, n;
+
+	f1=fopen("/home/aymen/Projects/skytravel19/src/identifiant.txt","r");
+	tmp1=fopen("/home/aymen/Projects/skytravel19/src/identifiant1.txt","a");
+
+	fscanf(f1,"%d",id_rec);
+	fprintf(tmp1,"%d",id_rec+1);
+
+
+fclose(f1);
+fclose(tmp1);
+rename("/home/aymen/Projects/skytravel19/src/identifiant1.txt","/home/aymen/Projects/skytravel19/src/identifiant.txt");
+n=id_rec+1;
+return n;
+}
+*/
+
+void modifier_reclamation(char id[], char recf[])
+{
+	FILE *f1, *tmp1, *f2, *tmp2 ;
+	char type[20];
+	char rec[200];
+	int id_rec;
+	char reponse[200];
+	char ch[100];
+
+	f1=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations.txt","r");
+	tmp1=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations1.txt","a+");
+	f2=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées.txt","a+");
+	tmp2=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées1.txt","a");
+
+	while(fscanf(f1,"%s %s %d %s\n",type,rec,&id_rec,reponse)!=EOF)
+{
+	sprintf(ch,"%d",id_rec);
+	if(strcmp(ch,id)==0)
+	{
+		fprintf(tmp1,"%s %s %d %s\n",type,recf,id_rec,reponse);
+		fprintf(tmp2,"%s %s %d %s\n",type,recf,id_rec,reponse);
+	}
+	else 
+	{
+		fprintf(tmp1,"%s %s %d %s\n",type,rec,id_rec,reponse);
+		fprintf(tmp2,"%s %s %d %s\n",type,rec,id_rec,reponse);
+	}
+}
+fclose(f1);
+fclose(tmp1);
+fclose(f2);
+fclose(tmp2);
+rename("/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations1.txt","/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations.txt");
+rename("/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées1.txt","/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées.txt");
+}
+
+void supprimer_reclamation(char id[])
+{
+	FILE *f1, *tmp1, *f2, *tmp2 ;
+	char type[20];
+	char rec[200];
+	int id_rec;
+	char reponse[200];
+	char ch[100];
+
+	f1=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations.txt","r");
+	tmp1=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations1.txt","a+");
+	f2=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées.txt","a+");
+	tmp2=fopen("/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées1.txt","a");
+
+	while(fscanf(f1,"%s %s %d %s\n",type,rec,&id_rec,reponse)!=EOF)
+{
+	sprintf(ch,"%d",id_rec);
+	if(strcmp(ch,id)==0)
+	{
+		continue;
+	}
+	else 
+	{
+		fprintf(tmp1,"%s %s %d %s\n",type,rec,id_rec,reponse);
+		fprintf(tmp2,"%s %s %d %s\n",type,rec,id_rec,reponse);
+	}
+}
+fclose(f1);
+fclose(tmp1);
+fclose(f2);
+fclose(tmp2);
+rename("/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations1.txt","/home/yaich/Desktop/skytravel1912/skytravel19/src/toutes_les_réclamations.txt");
+rename("/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées1.txt","/home/yaich/Desktop/skytravel1912/skytravel19/src/réclamations_non_traitées.txt");
+}
+
+//fin aymen
+

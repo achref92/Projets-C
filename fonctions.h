@@ -50,6 +50,9 @@ void modifind(Client u[200],char ch[20],char ch1[20],char ch2[20]);
 void reecriver(Client u[200],int n);
 void reecriver1(Offre tab[200],int n);
 void supprime(Client u[200],char ch[20]);
+void recremetation(Offre tab[200],Client u[200],Client c);
+int facture(Offre tab[200],Client u[200],Client c);
+int verificationide(Client u[200] ,Client c);
 
 //mouadh
 
@@ -59,3 +62,14 @@ void modifier(char nom[],char prenom[],char username[],char password[],char CIN[
 void afficher_client(GtkWidget *liste);
 void rechercher(char CIN []);
 //fin mouadh
+
+//aymen
+
+void ajouter_reclamation(char type[],char rec[],int id_rec,char reponse[]);
+void afficher_reclamation(GtkWidget *liste);
+void ajouter_reponse(char id[], char reponsef[]);
+void modifier_reclamtion(char id[], char recf[]);
+void supprimer_reclamation(char id[]);
+//int identifiant();
+
+//fin aymen
