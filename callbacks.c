@@ -5,7 +5,6 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #include "callbacks.h"
 #include "interface.h"
@@ -18,7 +17,7 @@ on_button_login_clicked                 (GtkWidget       *objet_graphique1,
                                         gpointer         user_data)
 {
 int x;
-	GtkWidget *a ,*b , *c, *login, *Interface_admin,*Interface_client,*Interface_agent;
+	GtkWidget *a ,*b , *c, *login, *Interface_admin,*interface_client,*Interface_agent;
 	char login1 [20], password[20];
 	
 	login=lookup_widget (objet_graphique1,"login");
@@ -39,8 +38,8 @@ int x;
 		gtk_widget_show (Interface_agent);
 		gtk_widget_hide (login);}
 	if (x==3) {
-		Interface_client=create_Interface_client();
-		gtk_widget_show (Interface_client);
+		interface_client=create_interface_client();
+		gtk_widget_show (interface_client);
 		gtk_widget_hide (login);}
 	else
 	{ gtk_label_set_text(GTK_LABEL(c),"authentification non validée");}
@@ -66,50 +65,25 @@ void on_ajouter_offre_clicked(GtkWidget *objet_graphique2 , gpointer user_data)
 
 
 Offre o;
-int test3;
-int J,M,A;
-char chO [30];
-GtkWidget *input1, *input2,*input3,*input4,*input5,*input6,*output,*jourO,*moisO,*anneeO;
+GtkWidget *input1, *input2,*input3,*input4,*input5,*input6;
 GtkWidget *Interface_agent;
 Interface_agent=lookup_widget(objet_graphique2 ,"Interface_agent");
-
-input1=lookup_widget(objet_graphique2, "combobox_type");
+input1=lookup_widget(objet_graphique2 ,"type_offre");
 input2=lookup_widget(objet_graphique2 ,"localite_offre");
-//date spin
-jourO=lookup_widget(objet_graphique2, "spinbuttonJourO");
-moisO=lookup_widget(objet_graphique2, "spinbuttonMoisO");
-anneeO=lookup_widget(objet_graphique2, "spinbuttonAnneeO");
-
-// fin date
-/*input3=lookup_widget(objet_graphique2 ,"date_expiration");*/
+input3=lookup_widget(objet_graphique2 ,"date_expiration");
 input4=lookup_widget(objet_graphique2 ,"prix");
 input5=lookup_widget(objet_graphique2 ,"quantite");
 input6=lookup_widget(objet_graphique2 ,"identifiant_offre");
 
-strcpy(o.type_offre,gtk_combo_box_get_active_text(GTK_COMBO_BOX(input1)));
+strcpy(o.type_offre,gtk_entry_get_text(GTK_ENTRY(input1)));
 strcpy(o.localite_offre,gtk_entry_get_text(GTK_ENTRY(input2)));
-// date spin
-J=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (jourO));
-M=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (moisO));
-A=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (anneeO));
-sprintf (chO,"%d/%d/%d",J,M,A);
-strcpy(o.date_expiration,chO);
-//fin date
-/*strcpy(o.date_expiration,gtk_entry_get_text(GTK_ENTRY(input3)));*/
+strcpy(o.date_expiration,gtk_entry_get_text(GTK_ENTRY(input3)));
 strcpy(o.prix,gtk_entry_get_text(GTK_ENTRY(input4)));
 strcpy(o.quantite,gtk_entry_get_text(GTK_ENTRY(input5)));
 strcpy(o.identifiant_offre,gtk_entry_get_text(GTK_ENTRY(input6)));
-test3 = verifier_o(o);
-if ( test3 == 1)
-{
-output = lookup_widget(objet_graphique2, "labelmsg2");
-gtk_label_set_text(GTK_LABEL(output) , "Il faut choisir un autre identifiant");
-}
-if ( test3 == 0)
-{
 ajouter_o(o);
 }
-}
+
 
 void on_afficher_offre_clicked (GtkWidget *objet_graphique3 , gpointer user_data)
 {
@@ -139,18 +113,18 @@ gtk_widget_destroy(Catalogue_interfaceClient);
 Interface_agent=create_Interface_agent();
 gtk_widget_show(Interface_agent);
 }
-//wassim///////////////////////////////
+//wassim
 void
 on_routour_clicked                     (GtkWidget *objet_graphique5 , gpointer user_data)
 {
 
-GtkWidget *Interface_client, *reserver_interfaceclient;
+GtkWidget *interface_client, *reserver_interfaceclient;
 reserver_interfaceclient=lookup_widget(objet_graphique5 ,"reserver_interfaceclient");
 
 gtk_widget_destroy(reserver_interfaceclient);
-//interface_client=lookup_widget(objet_graphique5 ,"Interface_client");
-Interface_client=create_Interface_client();
-gtk_widget_show(Interface_client);
+//interface_client=lookup_widget(objet_graphique5 ,"interface_client");
+interface_client=create_interface_client();
+gtk_widget_show(interface_client);
 
 
 
@@ -165,8 +139,8 @@ Client c;
 Client u[200];
 int i,a,x;
 	GtkWidget *input1, *input2,*input3,*output1,*win_affich,*output2;
-GtkWidget *Interface_client;
-Interface_client=lookup_widget(objet_graphique7 ,"Interface_client");
+GtkWidget *interface_client;
+interface_client=lookup_widget(objet_graphique7 ,"interface_client");
 GtkWidget *treeview;
 input1=lookup_widget(objet_graphique7 ,"identifiantdeoffre");
 input2=lookup_widget(objet_graphique7 ,"datereserver");
@@ -203,9 +177,9 @@ gtk_label_set_text(GTK_LABEL(output1),"identifiant invalide");
 
 void
 on_afficher_reservation_clicked        (GtkWidget *objet_graphique7 , gpointer user_data)
-{GtkWidget *Interface_client,*win_affich,*treeview;
-Interface_client=lookup_widget(objet_graphique7 ,"Interface_client");
-gtk_widget_destroy(Interface_client);
+{GtkWidget *interface_client,*win_affich,*treeview;
+interface_client=lookup_widget(objet_graphique7 ,"interface_client");
+gtk_widget_destroy(interface_client);
 
 win_affich=lookup_widget(objet_graphique7,"reserver_interfaceclient");
 win_affich=create_reserver_interfaceclient();
@@ -231,8 +205,8 @@ Client c;
 Client u[200];
 int i;
 	GtkWidget *input1, *input2,*input3,*output1,*treeview,*win_affich;
-GtkWidget *Interface_client;
-Interface_client=lookup_widget(objet_graphique8 ,"Interface_client");
+GtkWidget *interface_client;
+interface_client=lookup_widget(objet_graphique8 ,"interface_client");
 
 input1=lookup_widget(objet_graphique8 ,"identifiantdeoffre1");
 input2=lookup_widget(objet_graphique8 ,"datereserver1");
@@ -251,7 +225,7 @@ decrementation(tab,c.nbrepersonne,c.identifiantdeoffre);
 modifind(u,c.nbrepersonne,c.datereserver,c.identifiantdeoffre);
 
 
-gtk_widget_destroy(Interface_client);
+gtk_widget_destroy(interface_client);
 
 win_affich=lookup_widget(objet_graphique8,"reserver_interfaceclient");
 win_affich=create_reserver_interfaceclient();
@@ -271,7 +245,7 @@ affiche_client(treeview);
 void
 on_supprimie_client_clicked            (GtkWidget       *button,
                                         gpointer         user_data)
-{GtkWidget *input1,*output1,*treeview,*win_affich,*Interface_client;
+{GtkWidget *input1,*output1,*treeview,*win_affich,*interface_client;
 Client c;
 Offre tab[200];
 Client u[200];
@@ -284,9 +258,9 @@ supprime(u,c.identifiantdeoffre);
 
 gtk_label_set_text(GTK_LABEL(output1),"succeé");
 
-Interface_client=lookup_widget(button,"Interface_client");
+interface_client=lookup_widget(button,"interface_client");
 
-gtk_widget_destroy(Interface_client);
+gtk_widget_destroy(interface_client);
 
 win_affich=lookup_widget(button,"reserver_interfaceclient");
 win_affich=create_reserver_interfaceclient();
@@ -299,63 +273,32 @@ gtk_label_set_text(GTK_LABEL(output1),"verifier votre identifiant ??");
 
 
 }
-
-
-
-
-
-
-
-
-
+//fin wassim
 // achref
 void
 on_modifier_offre_clicked (GtkButton *objet_graphique4,gpointer         user_data)
 {
 Offre o;
-int test;
-int JOM,MOM,AOM;
-char chOM [30];
-GtkWidget *a1, *a2,*a3,*a4,*a5,*a6,*jourOM,*moisOM,*anneeOM;
-GtkWidget *output;
+GtkWidget *a1, *a2,*a3,*a4,*a5,*a6;
 GtkWidget *Interface_agent;
 GtkWidget *Catalogue_interfaceClient;
 GtkWidget *treeviewCatalogueA;
 Interface_agent=lookup_widget(objet_graphique4 ,"Interface_agent");
-a1=lookup_widget(objet_graphique4 ,"combobox_typeM");
+a1=lookup_widget(objet_graphique4 ,"type_offreM");
 a2=lookup_widget(objet_graphique4 ,"localite_offreM");
-//a3=lookup_widget(objet_graphique4 ,"date_expirationM");
-//date spin
-jourOM=lookup_widget(objet_graphique4, "spinbuttonJourOM");
-moisOM=lookup_widget(objet_graphique4, "spinbuttonMoisOM");
-anneeOM=lookup_widget(objet_graphique4, "spinbuttonAnneeOM");
-//fin date spin
+a3=lookup_widget(objet_graphique4 ,"date_expirationM");
 a4=lookup_widget(objet_graphique4 ,"prixM");
 a5=lookup_widget(objet_graphique4 ,"quantiteM");
 a6=lookup_widget(objet_graphique4 ,"identifiant_offreM");
 
-strcpy(o.type_offre,gtk_combo_box_get_active_text(GTK_COMBO_BOX(a1)));
+strcpy(o.type_offre,gtk_entry_get_text(GTK_ENTRY(a1)));
 strcpy(o.localite_offre,gtk_entry_get_text(GTK_ENTRY(a2)));
-// date spin
-JOM=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (jourOM));
-MOM=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (moisOM));
-AOM=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (anneeOM));
-sprintf (chOM,"%d/%d/%d",JOM,MOM,AOM);
-strcpy(o.date_expiration,chOM);
-//fin date
-//strcpy(o.date_expiration,gtk_entry_get_text(GTK_ENTRY(a3)));
+strcpy(o.date_expiration,gtk_entry_get_text(GTK_ENTRY(a3)));
 strcpy(o.prix,gtk_entry_get_text(GTK_ENTRY(a4)));
 strcpy(o.quantite,gtk_entry_get_text(GTK_ENTRY(a5)));
 strcpy(o.identifiant_offre,gtk_entry_get_text(GTK_ENTRY(a6)));
-test = verifier_o(o);
-if ( test == 0)
-{
-output = lookup_widget(objet_graphique4, "labelmsg");
-gtk_label_set_text(GTK_LABEL(output) , "cette identifiant n'existe pas");
-}
-if ( test == 1)
-{
 modifier_o (o);
+
 Interface_agent=lookup_widget(objet_graphique4,"Interface_agent");
 gtk_widget_destroy(Interface_agent);
 Catalogue_interfaceClient=lookup_widget(objet_graphique4,"Catalogue_interfaceClient");
@@ -363,19 +306,17 @@ Catalogue_interfaceClient=create_Catalogue_interfaceClient();
 gtk_widget_show(Catalogue_interfaceClient);
 treeviewCatalogueA=lookup_widget(Catalogue_interfaceClient,"treeviewCatalogueA");
 afficher_o(treeviewCatalogueA);
-}
+
 	
 }
 
 
+
 void
 on_supprimer_offre_clicked (GtkButton  *objet_graphique5, gpointer  user_data)
-{ 
+{
 	char identifiant[40];
-	Offre o;
-	int test1;
 GtkWidget *a;
-GtkWidget *output1;
 GtkWidget *Interface_agent;
 GtkWidget *Catalogue_interfaceClient;
 GtkWidget *treeviewCatalogueA;
@@ -385,15 +326,8 @@ a=lookup_widget(objet_graphique5 ,"identifiant_offreS");
 
 
 strcpy(identifiant,gtk_entry_get_text(GTK_ENTRY(a)));
-test1 = verifier_os(identifiant);
-if ( test1 == 0)
-{
-output1 = lookup_widget(objet_graphique5, "labelmsg1");
-gtk_label_set_text(GTK_LABEL(output1) , "cette identifiant n'existe pas");
-}
-if ( test1 == 1)
-{
 supprimer_o (identifiant);
+
 Interface_agent=lookup_widget(objet_graphique5,"Interface_agent");
 gtk_widget_destroy(Interface_agent);
 Catalogue_interfaceClient=lookup_widget(objet_graphique5,"Catalogue_interfaceClient");
@@ -401,7 +335,7 @@ Catalogue_interfaceClient=create_Catalogue_interfaceClient();
 gtk_widget_show(Catalogue_interfaceClient);
 treeviewCatalogueA=lookup_widget(Catalogue_interfaceClient,"treeviewCatalogueA");
 afficher_o(treeviewCatalogueA);
-}
+
 }
 //mouadh
 
@@ -409,10 +343,8 @@ void
 on_buttonInscription_clicked           (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-	GtkWidget *a ,*b,*c,*d,*e,*f,*jourO,*moisO,*anneeO,*Interface_acceuil, *login;
+	GtkWidget *a ,*b,*c,*d,*e,*f,*g ,*Interface_acceuil, *login;
 	char nom[20],prenom[20],username [20],password[20],CIN[20],adresse[20],date[20];
-	int J,M,A;
-	char chO [20];
 	
 	a=lookup_widget(objet_graphique,"mentrynom");
 	b=lookup_widget(objet_graphique,"mentryprenom");
@@ -420,20 +352,14 @@ on_buttonInscription_clicked           (GtkWidget       *objet_graphique,
 	d=lookup_widget(objet_graphique,"mentrypassword");
 	e=lookup_widget(objet_graphique,"mentryCIN");
 	f=lookup_widget(objet_graphique,"mentryadresse");
-	jourO=lookup_widget(objet_graphique, "mspinbuttonj");
-	moisO=lookup_widget(objet_graphique, "mspinbuttonm");
-	anneeO=lookup_widget(objet_graphique, "mspinbuttona");
-	J=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (jourO));
-	M=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (moisO));
-	A=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (anneeO));
-	sprintf (chO,"%d/%d/%d",J,M,A);
+	g=lookup_widget(objet_graphique,"mentrydate");
 	strcpy(nom,gtk_entry_get_text(GTK_ENTRY(a)));
 	strcpy(prenom,gtk_entry_get_text(GTK_ENTRY(b)));
         strcpy(username,gtk_entry_get_text(GTK_ENTRY(c)));
 	strcpy(password,gtk_entry_get_text(GTK_ENTRY(d)));
 	strcpy(CIN,gtk_entry_get_text(GTK_ENTRY(e)));
 	strcpy(adresse,gtk_entry_get_text(GTK_ENTRY(f)));
-	strcpy(date,chO);
+	strcpy(date,gtk_entry_get_text(GTK_ENTRY(g)));
         ajouter(nom,prenom,username,password,CIN,adresse,date);
 
 	login=create_login();
@@ -443,17 +369,16 @@ on_buttonInscription_clicked           (GtkWidget       *objet_graphique,
 
 }
 
-
 void
 on_mbuttonajouter_clicked              (GtkButton       *mobjet_graphique,
                                         gpointer         user_data)
-{	GtkWidget *Interface_admin;
-	GtkWidget *majouter;
-	Interface_admin=lookup_widget(mobjet_graphique ,"Interface_admin");
+{	GtkWidget *Interface_agent;
+	GtkWidget *Interface_acceuil;
+	Interface_agent=lookup_widget(mobjet_graphique ,"Interface_agent");
 
-gtk_widget_hide(Interface_admin);
-majouter=create_majouter();
-gtk_widget_show(majouter);
+gtk_widget_hide(Interface_agent);
+Interface_acceuil=create_Interface_acceuil();
+gtk_widget_show(Interface_acceuil);
 
 }
 
@@ -463,7 +388,6 @@ on_mbuttonDel_clicked                  (GtkWidget   *mobjet_graphique11 , gpoint
 {	GtkWidget *a,*Interface_admin,*mafficher ;
 	GtkWidget *mtreeview1;
 	char	CIN[20];
-	
 	a=lookup_widget(mobjet_graphique11,"mentrycinDel");
 	strcpy(CIN,gtk_entry_get_text(GTK_ENTRY(a)));
 	supprimer(CIN);
@@ -481,33 +405,23 @@ on_mbuttonDel_clicked                  (GtkWidget   *mobjet_graphique11 , gpoint
 void
 on_mbuttonMod_clicked                  (GtkWidget       *mobjet_graphique10,
                                         gpointer         user_data)
-{	GtkWidget *a ,*b,*c,*d,*e,*f,*g,*Interface_admin,*mafficher,*jourO,*moisO,*anneeO;
+{	GtkWidget *a ,*b,*c,*d,*e,*f,*g,*Interface_admin,*mafficher ;
 	GtkWidget *mtreeview1;
-	int J,M,A;
-	char chO [20];
 	char nom[20],prenom[20],username [20],password[20],CIN[20],adresse[20],date[20];
-	
 	a=lookup_widget(mobjet_graphique10,"mentrynomMod");
 	b=lookup_widget(mobjet_graphique10,"mentryprenomMod");
 	c=lookup_widget(mobjet_graphique10,"mentryusernameMod");
 	d=lookup_widget(mobjet_graphique10,"mentrypassMod");
-	f=lookup_widget(mobjet_graphique10,"mentryadresseMod");
 	e=lookup_widget(mobjet_graphique10,"mentrycinMod");
-	jourO=lookup_widget(mobjet_graphique10,"mspinbuttonj2");
-	moisO=lookup_widget(mobjet_graphique10,"mspinbuttonm2");
-	anneeO=lookup_widget(mobjet_graphique10,"mspinbuttona2");
-	J=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (jourO));
-	M=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (moisO));
-	A=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (anneeO));
-	sprintf (chO,"%d/%d/%d",J,M,A);
+	f=lookup_widget(mobjet_graphique10,"mentryadresseMod");
+	g=lookup_widget(mobjet_graphique10,"mentrydateMod");
 	strcpy(nom,gtk_entry_get_text(GTK_ENTRY(a)));
 	strcpy(prenom,gtk_entry_get_text(GTK_ENTRY(b)));
         strcpy(username,gtk_entry_get_text(GTK_ENTRY(c)));
 	strcpy(password,gtk_entry_get_text(GTK_ENTRY(d)));
-	strcpy(adresse,gtk_entry_get_text(GTK_ENTRY(f)));
 	strcpy(CIN,gtk_entry_get_text(GTK_ENTRY(e)));
-	strcpy(date,chO);
-	
+	strcpy(adresse,gtk_entry_get_text(GTK_ENTRY(f)));
+	strcpy(date,gtk_entry_get_text(GTK_ENTRY(g)));
         modifier(nom,prenom,username,password,CIN,adresse,date);
 	Interface_admin=lookup_widget(mobjet_graphique10,"Interface_admin");
 	gtk_widget_hide(Interface_admin);
@@ -548,217 +462,17 @@ Interface_admin=create_Interface_admin();
 gtk_widget_show(Interface_admin);
 
 }
-
-
-void
-on_mAjouteradmin_clicked               (GtkWidget *objet_graphique55, gpointer user_data)
-{	GtkWidget *a ,*b,*c,*d,*e,*f,*jourO,*moisO,*anneeO,*majouter, *Interface_admin;
-	char nom[20],prenom[20],username [20],password[20],CIN[20],adresse[20],date[20];
-	int J,M,A;
-	char chO [20];
-	
-	a=lookup_widget(objet_graphique55,"mentrynom1");
-	b=lookup_widget(objet_graphique55,"mentryprenom1");
-	c=lookup_widget(objet_graphique55,"mentryusername1");
-	d=lookup_widget(objet_graphique55,"mentrypassword1");
-	e=lookup_widget(objet_graphique55,"mentryCIN1");
-	f=lookup_widget(objet_graphique55,"mentryadresse1");
-	jourO=lookup_widget(objet_graphique55, "mspinbuttonj1");
-	moisO=lookup_widget(objet_graphique55, "mspinbuttonm1");
-	anneeO=lookup_widget(objet_graphique55, "mspinbuttona1");
-	J=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (jourO));
-	M=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (moisO));
-	A=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (anneeO));
-	sprintf (chO,"%d/%d/%d",J,M,A);
-	strcpy(nom,gtk_entry_get_text(GTK_ENTRY(a)));
-	strcpy(prenom,gtk_entry_get_text(GTK_ENTRY(b)));
-        strcpy(username,gtk_entry_get_text(GTK_ENTRY(c)));
-	strcpy(password,gtk_entry_get_text(GTK_ENTRY(d)));
-	strcpy(CIN,gtk_entry_get_text(GTK_ENTRY(e)));
-	strcpy(adresse,gtk_entry_get_text(GTK_ENTRY(f)));
-	strcpy(date,chO);
-	
-        ajouter(nom,prenom,username,password,CIN,adresse,date);
-
-	Interface_admin=create_Interface_admin();
-	majouter=lookup_widget(objet_graphique55,"majouter");
-	gtk_widget_destroy(majouter);
-	gtk_widget_show (Interface_admin);
-
-
-
-}
-
-
-void
-on_mbuttonretour1_clicked              (GtkWidget *mobjet_graphique0, gpointer user_data)
-{
-GtkWidget *Interface_admin, *majouter;
-majouter=lookup_widget(mobjet_graphique0 ,"majouter");
-
-gtk_widget_destroy(majouter);
-Interface_admin=create_Interface_admin();
-gtk_widget_show(Interface_admin);
-}
-
 //fin mouadh
+  
 
-//achref
 
+//*/////////////////////////////////////////////////*//*/////
 void
-on_button1_clicked(GtkWidget *objet_graphiquea, gpointer user_data)
-{
-GtkWidget *login,*Interface_acceuil;
-
-Interface_acceuil=lookup_widget(objet_graphiquea ,"Interface_acceuil");
-
-gtk_widget_destroy (Interface_acceuil);
-login=create_login();
-gtk_widget_show(login);
-}
-
-
-void
-on_propos_clicked (GtkWidget *objet_graphiquea1, gpointer user_data)
-{
-GtkWidget *apropos,*Interface_acceuil;
-
-
-Interface_acceuil=lookup_widget(objet_graphiquea1 ,"Interface_acceuil");
-gtk_widget_destroy (Interface_acceuil);
-apropos=create_apropos();
-gtk_widget_show(apropos);
-}
-
-
-void
-on_acceuil_clicked(GtkWidget *objet_graphiquea2, gpointer user_data)
-{
-GtkWidget *apropos,*Interface_acceuil;
-
-apropos=lookup_widget(objet_graphiquea2 ,"apropos");
-gtk_widget_destroy (apropos);
-Interface_acceuil=create_Interface_acceuil();
-gtk_widget_show(Interface_acceuil);
-}
-//fin achref
-
-//aymen
-
-void
-on_button51_clicked                     (GtkWidget       *aobjet1,
+on_recherchenontraite_clicked          (GtkButton       *button,
                                         gpointer         user_data)
 {
-GtkWidget *Interface_client;
-GtkWidget *combobox7;
-GtkWidget *input1;
-GtkWidget *output;
 
-char type[20];
-char rec[200];
-int id_rec;
-char reponse[]="N/A";
-
-
-
-combobox7=lookup_widget(aobjet1,"combobox7");
-input1=lookup_widget(aobjet1,"entry86");
-Interface_client=lookup_widget(aobjet1 ,"Interface_client");
-
-
-strcpy(type,gtk_combo_box_get_active_text(GTK_COMBO_BOX(combobox7)));
-strcpy(rec,gtk_entry_get_text(GTK_ENTRY(input1)));
-//id_rec=identifiant();
-ajouter_reclamation(type,rec,id_rec,reponse);
-
-output=lookup_widget(aobjet1,"label11124");
-gtk_label_set_text(GTK_LABEL(output),"Réclamation envoyée");
 }
-
-/*void
-on_button65_clicked             (GtkWidget *objet99 , gpointer user_data)
-{	
-GtkWidget *Interface_client;
-GtkWidget *aafficher;
-GtkWidget *atreeview36;
-
-Interface_client=lookup_widget(objet99,"Interface_client");
-//gtk_widget_hide(Interface_client);
-aafficher=lookup_widget(objet99,"aafficher");
-aafficher=create_aafficher();
-gtk_widget_show(aafficher);
-atreeview36=lookup_widget(aafficher,"atreeview36");
-afficher_reclamation(atreeview36);
-
-}*/
-
-void
-on_button14_clicked                     (GtkWidget       *aobjet98,
-                                        gpointer         user_data)
-{
-GtkWidget *Interface_agent;
-GtkWidget *input1, *input2;
-GtkWidget *output;
-
-char id_rec[100];
-char reponse[200];
-
-input1=lookup_widget(aobjet98,"entry34");
-input2=lookup_widget(aobjet98,"entry35");
-Interface_agent=lookup_widget(aobjet98 ,"Interface_agent");
-strcpy(id_rec,gtk_entry_get_text(GTK_ENTRY(input1)));
-strcpy(reponse,gtk_entry_get_text(GTK_ENTRY(input2)));
-ajouter_reponse(id_rec,reponse);
-output=lookup_widget(aobjet98,"label11127");
-gtk_label_set_text(GTK_LABEL(output),"Réponse envoyée");
-}
-
-void
-on_button53_clicked                     (GtkWidget       *objet,
-                                        gpointer         user_data)
-{
-GtkWidget *Interface_client;
-GtkWidget *input1, *input2;
-GtkWidget *output;
-
-char id_rec[100];
-char rec[200];
-
-input1=lookup_widget(objet,"entry89");
-input2=lookup_widget(objet,"entry88");
-Interface_client=lookup_widget(objet ,"Interface_client");
-strcpy(id_rec,gtk_entry_get_text(GTK_ENTRY(input1)));
-strcpy(rec,gtk_entry_get_text(GTK_ENTRY(input2)));
-modifier_reclamation(id_rec,rec);
-output=lookup_widget(objet,"label11125");
-gtk_label_set_text(GTK_LABEL(output),"Réclamtion modifiée");
-}
-
-
-
-
-void
-on_button55_clicked                    (GtkWidget       *objet,
-                                        gpointer         user_data)
-{
-GtkWidget *Interface_client;
-GtkWidget *input1;
-GtkWidget *output;
-
-char id_rec[100];
-
-input1=lookup_widget(objet,"entry92");
-Interface_client=lookup_widget(objet ,"Interface_client");
-strcpy(id_rec,gtk_entry_get_text(GTK_ENTRY(input1)));
-supprimer_reclamation(id_rec);
-output=lookup_widget(objet,"label11126");
-gtk_label_set_text(GTK_LABEL(output),"Réclamtion supprimée");
-}
-//fin aymen
-
-
-
-//wassim
 
 
 void
@@ -812,12 +526,4 @@ treeviewCatalogueA=lookup_widget(Catalogue_interfaceClient,"treeviewCatalogueA")
 affiche_client(treeviewCatalogueA);}
 
 }
-
-
-
-
-
-
-
-
 
